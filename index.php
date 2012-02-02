@@ -14,9 +14,7 @@
 			<div id="header"><?php echo $system->serverAddr; ?></div>
 			<div id="list">
 				<ul class="directory">
-					<li class="crumbs">
-
-					</li>
+					<li class="crumbs"></li>
 					<?php foreach ($directory->list as $item): ?>
 						<li href="<?php echo $item['type'] === 'dir' ? $item['documentPath'] : $item['webPath']; ?>" type="<?php echo $item['type']; ?>">
 							<?php echo $item['name']; ?>

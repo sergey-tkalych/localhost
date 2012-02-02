@@ -14,7 +14,7 @@
 				}
 				if (type === 'dir'){
 					content.load('nav.php', {href: href}, function(){
-
+						$('li:not(.crumbs), li.crumbs span:not(.cur)', content).bind('click', onClick);
 					});
 				}
 			};
@@ -22,6 +22,6 @@
 		onResizeWindow();
 		$(window).bind('resize', onResizeWindow);
 
-		$('li:not(.crumbs), li.crumbs span', content).live('click', onClick);
+		$('li:not(.crumbs), li.crumbs span:not(.cur)', content).bind('click', onClick);
 	});
 })();

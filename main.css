@@ -52,6 +52,8 @@ ul {
 #list .directory li.crumbs {
 	border-bottom: 1px solid #CFD1CA;
 	border-radius: 0;
+	min-height: 30px;
+	height: auto;
 }
 
 #list .directory li.crumbs span {
@@ -71,7 +73,7 @@ ul {
 	font-weight: normal;
 }
 
-#list .directory li.crumbs span:hover {
+#list .directory li.crumbs span:hover, #list .directory li.crumbs span.cur {
 	background: #20BCE3;
 	color: #222;
 }

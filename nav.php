@@ -10,6 +10,7 @@
 		<?php for ($i = 0; $i < count($splitRelPath) - 2; $i++): ?>
 			<span href="<?php echo $path .= $splitRelPath[$i].'/'; ?>" type="dir"><?php echo $splitRelPath[$i]; ?></span>
 		<?php endfor; ?>
+		<span class="cur"><?php echo $splitRelPath[count($splitRelPath) - 2]; ?></span>
 	<?php endif; ?>
 </li>
 <?php if ($directory->backPath): ?>
