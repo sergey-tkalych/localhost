@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="main.css" />
-		<script src="jquery.js"></script>
+		<script src="ext.js"></script>
 		<script src="main.js"></script>
 	</head>
 	<body>
