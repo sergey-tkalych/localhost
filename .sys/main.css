@@ -1,0 +1,21 @@
+body {margin: 0; background: #F2F2F2; font: 14px/19px Arial, Verdana; -webkit-user-select: none;}
+
+ul {list-style: none; margin: 0; padding: 0;}
+
+#page {}
+
+#header {text-align: center; height: 30px; background: #040404; color: #ffffff; font-size: 20px; line-height: 30px; font-weight: bold; text-transform: uppercase;}
+
+#footer {text-align: center; height: 30px; padding: 10px;}
+#footer .content {background: #ffffff; height: 100%;}
+
+#list {padding: 0 10px;}
+#list .wrapper {/*height: 100%;*/ overflow-y: auto;}
+
+#list .directory {/*background: #E0E2DA;*/}
+#list .directory li {margin: 0 10px 0 10px; height: 30px; padding: 3px 10px; line-height: 30px; border-radius: 5px; cursor: pointer;}
+
+#list .crumbs {border-bottom: 1px solid #CFD1CA; border-radius: 0; min-height: 30px; height: auto;}
+#list .crumbs span {display: inline-block; margin: 0 3px 0 0; cursor: pointer; border: 1px solid #e6e9dd; border-radius: 5px; padding: 0 10px; background: #222; color: #ffffff; line-height: 30px;}
+#list .crumbs:hover {background: #F2F2F2; cursor: auto; font-weight: normal;}
+#list .crumbs span.cur {background: #20BCE3;color: #222;}

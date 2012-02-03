@@ -1,0 +1,5 @@
+#list .directory li:hover{ background: #CFD1CA; font-weight: bold;}
+
+#list .crumbs span:hover {background: #20BCE3;color: #222;}
+
+#list .directory li:first-child {border-top-right-radius: 0; border-top-left-radius: 0;}

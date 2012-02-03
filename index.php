@@ -1,28 +1,38 @@
 <?php
-	include_once('lib.php');
+	include_once('.sys/lib.php');
 	$directory = new Dir($system->documentRoot);
+	$isiPad = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPad');
 ?>
 
 <html>
 	<head>
-		<link rel="stylesheet" href="main.css" />
-		<script src="ext.js"></script>
-		<script src="main.js"></script>
+		<link rel="stylesheet" href=".sys/main.css" />
+		<script src=".sys/ext.js"></script>
+		<?php if ($isiPad): ?>
+			<script src=".sys/iscroll.js"></script>
+		<?php else: ?>
+			<link rel="stylesheet" href=".sys/browser.css" />
+		<?php endif; ?>
+		<script src=".sys/main.js"></script>
 	</head>
 	<body>
 		<div id="page">
 			<div id="header"><?php echo $system->serverAddr; ?></div>
 			<div id="list">
-				<ul class="directory">
-					<li class="crumbs"></li>
-					<?php foreach ($directory->list as $item): ?>
-						<li href="<?php echo $item['type'] === 'dir' ? $item['documentPath'] : $item['webPath']; ?>" type="<?php echo $item['type']; ?>">
-							<?php echo $item['name']; ?>
-						</li>
-					<?php endforeach; ?>
-				</ul>
+				<div class="crumbs"></div>
+				<div class="wrapper">
+					<ul class="directory">
+						<?php foreach ($directory->list as $item): ?>
+							<li href="<?php echo $item['type'] === 'dir' ? $item['documentPath'] : $item['webPath']; ?>" type="<?php echo $item['type']; ?>">
+								<?php echo $item['name']; ?>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
 			</div>
-			<div id="footer"></div>
+			<div id="footer">
+				<div class="content"></div>
+			</div>
 		</div>
 	</body>
 </html>
