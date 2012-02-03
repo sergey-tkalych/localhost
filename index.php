@@ -1,11 +1,12 @@
 <?php
 	include_once('.sys/lib.php');
-	$directory = new Dir($system->documentRoot);
+	$directory = new Dir($system->documentRoot, array('.git', '.svn', '.idea', '.sys'));
 	$isiPad = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPad');
 ?>
 
 <html>
 	<head>
+		<title><?php echo $system->serverAddr; ?></title>
 		<link rel="stylesheet" href=".sys/main.css" />
 		<script src=".sys/ext.js"></script>
 		<?php if ($isiPad): ?>
@@ -21,7 +22,7 @@
 			<div id="list">
 				<div class="crumbs"></div>
 				<div class="wrapper">
-					<ul class="directory">
+					<ul class="directory" documentRoot="<?php echo $system->documentRoot; ?>" relPath="<?php echo $directory->relPath; ?>">
 						<?php foreach ($directory->list as $item): ?>
 							<li href="<?php echo $item['type'] === 'dir' ? $item['documentPath'] : $item['webPath']; ?>" type="<?php echo $item['type']; ?>">
 								<?php echo $item['name']; ?>

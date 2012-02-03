@@ -22,20 +22,21 @@ class System{
 
 class Dir{
 	private $path, $backPath, $relPath, $webPath;
-	private $list, $dirList, $fileList;
+	private $list, $dirList, $fileList, $exclude;
 
-	public function __construct($path){
-		$this->setPath($path);
+	public function __construct($path, $exclude){
+		$this->setPath($path, $exclude);
 	}
 
 	public function __get($name){
 		return $this->$name;
 	}
 
-	public function setPath($path){
+	public function setPath($path, $exclude = array()){
 		if (!is_dir($path))
 			return;
 		$this->path = $path;
+		$this->exclude = $exclude;
 		$this->backPath = false;
 		$system = System::getInstance();
 		$this->relPath = str_replace($system->documentRoot, '', $this->path);
@@ -55,31 +56,30 @@ class Dir{
 			$this->dirList = $this->fileList = array();
 
 			foreach ($this->list as $name){
-				$documentPath = $this->path.$name;
-				$webPath = $this->webPath.$name;
-				if (is_dir($documentPath)){
-					$this->dirList[] = array(
-						'name' => $name,
-						'type' => 'dir',
-						'documentPath' => $documentPath.'/',
-						'webPath' => $webPath.'/'
-					);
-				}
-				if (is_file($documentPath)){
-					$this->fileList[] = array(
-						'name' => $name,
-						'type' => 'file',
-						'documentPath' => $documentPath,
-						'webPath' => $webPath
-					);
+				if (!in_array($name, $this->exclude)){
+					$documentPath = $this->path.$name;
+					$webPath = $this->webPath.$name;
+					if (is_dir($documentPath)){
+						$this->dirList[] = array(
+							'name' => $name,
+							'type' => 'dir',
+							'documentPath' => $documentPath.'/',
+							'webPath' => $webPath.'/'
+						);
+					}
+					if (is_file($documentPath)){
+						$this->fileList[] = array(
+							'name' => $name,
+							'type' => 'file',
+							'documentPath' => $documentPath,
+							'webPath' => $webPath
+						);
+					}
 				}
 			}
 
 			$this->list = array();
-			foreach ($this->dirList as $dir)
-				$this->list[] = $dir;
-			foreach ($this->fileList as $file)
-				$this->list[] = $file;
+			$this->list = array_merge($this->dirList, $this->fileList);
 		}
 		catch(Exception $e){
 

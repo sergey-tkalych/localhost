@@ -1,7 +1,7 @@
 <?php
-	$path = isset($_POST['href']) ? $_POST['href'] : $system->documentRoot;
 	include_once('lib.php');
-	$directory = new Dir($path);
+	$path = isset($_POST['href']) ? $_POST['href'] : $system->documentRoot;
+	$directory = new Dir($path, array('.git', '.svn', '.idea', '.sys'));
 ?>
 
 <div class="crumbs">
@@ -14,7 +14,7 @@
 	<?php endif; ?>
 </div>
 <div class="wrapper">
-	<ul class="directory">
+	<ul class="directory" documentRoot="<?php echo $system->documentRoot; ?>" relPath="<?php echo $directory->relPath; ?>">
 		<?php if ($directory->backPath): ?>
 			<li href="<?php echo $directory->backPath; ?>" type="dir">...</li>
 		<?php endif; ?>

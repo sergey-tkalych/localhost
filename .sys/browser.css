@@ -1,5 +1,4 @@
-#list .directory li:hover{ background: #CFD1CA; font-weight: bold;}
+#list .directory li:hover {background: #CFD1CA;}
+#list .directory li[type="dir"]:hover, #list .directory li[type="exec"]:hover {background: #CFD1CA url("dir.png") 0 5px no-repeat;}
 
 #list .crumbs span:hover {background: #20BCE3;color: #222;}
-
-#list .directory li:first-child {border-top-right-radius: 0; border-top-left-radius: 0;}
