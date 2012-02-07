@@ -6,6 +6,7 @@
 
 <html>
 	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<title><?php echo $system->serverAddr; ?></title>
 		<link rel="stylesheet" href=".sys/main.css" />
 		<script src=".sys/ext.js"></script>
@@ -18,7 +19,15 @@
 	</head>
 	<body>
 		<div id="page">
-			<div id="header"><?php echo $system->serverAddr; ?></div>
+			<div id="header">
+				<?php echo $system->serverAddr; ?>
+				<div class="exec-switcher">
+					Execute index
+					<span <?php echo $directory->config['exec'] ? '' : 'class="off"'; ?>>
+						<?php echo $directory->config['exec'] ? ':)' : ':('; ?>
+					</span>
+				</div>
+			</div>
 			<div id="list">
 				<div class="crumbs"></div>
 				<div class="wrapper">
@@ -32,7 +41,9 @@
 				</div>
 			</div>
 			<div id="footer">
-				<div class="content"></div>
+				<div class="content">
+					<a href=".sys/index.php">Old index</a>
+				</div>
 			</div>
 		</div>
 	</body>

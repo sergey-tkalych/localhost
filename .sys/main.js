@@ -2,6 +2,7 @@ window.addEventListener('load', function(){
 	var list = document.getElementById('list'),
 		header = document.getElementById('header'),
 		footer = document.getElementById('footer'),
+		execSwitcher = header.querySelector('.exec-switcher'),
 		createScroller = function(selector){
 			if (!isiPad) return;
 			return new iScroll(selector, {desktopCompatibility:true, vScrollbar: true});
@@ -36,6 +37,18 @@ window.addEventListener('load', function(){
 			if (type === 'dir'){
 				loadDirectory(href);
 			}
+		},
+		switcher = function(){
+			execSwitcher.removeEventListener(events.start, switcher);
+			var indicator = this.querySelector('span'),
+				exec = indicator.hasClass('off') ? 0 : 1;
+			indicator.addClass('waite');
+			indicator.innerText = '?';
+			new Post('.sys/exec.php', {exec: exec}, function(request){
+				if (request.readyState == 4){
+					window.location.reload();
+				}
+			});
 		};
 
 	onResizeWindow();
@@ -49,5 +62,7 @@ window.addEventListener('load', function(){
 	list.querySelectorAll('li').forEach(function(el){
 		el.addEventListener(events.click, onClick);
 	});
+
+	execSwitcher.addEventListener(events.start, switcher);
 });
 document.addEventListener(events.move, function(){event.preventDefault();});

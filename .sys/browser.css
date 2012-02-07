@@ -1,4 +1,7 @@
-#list .directory li:hover {background: #CFD1CA;}
-#list .directory li[type="dir"]:hover, #list .directory li[type="exec"]:hover {background: #CFD1CA url("dir.png") 0 5px no-repeat;}
+#footer .content a:hover {text-decoration: underline;}
 
+#list .directory li:hover {background: #c0def4; font-weight: bold;}
+#list .directory li[type="dir"]:hover, #list .directory li[type="exec"]:hover {background: #c0def4 url("dir.png") 10px 5px no-repeat;}
+
+#list .crumbs:hover {background: #E0E2DA; cursor: auto; font-weight: normal;}
 #list .crumbs span:hover {background: #20BCE3;color: #222;}

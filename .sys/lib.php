@@ -23,8 +23,15 @@ class System{
 class Dir{
 	private $path, $backPath, $relPath, $webPath;
 	private $list, $dirList, $fileList, $exclude;
+	private $config;
 
 	public function __construct($path, $exclude){
+		try{
+			$file = '.sys/config.json';
+			$file = is_file($file) ? $file : 'config.json';
+			$this->config = json_decode(file_get_contents($file), true);
+		}
+		catch (Exception $e){}
 		$this->setPath($path, $exclude);
 	}
 
@@ -60,12 +67,12 @@ class Dir{
 					$documentPath = $this->path.$name;
 					$webPath = $this->webPath.$name;
 					if (is_dir($documentPath)){
-						$this->dirList[] = array(
-							'name' => $name,
-							'type' => 'dir',
-							'documentPath' => $documentPath.'/',
-							'webPath' => $webPath.'/'
-						);
+						$this->dirList[] = $this->checkExecute(array(
+								'name' => $name,
+								'type' => 'dir',
+								'documentPath' => $documentPath.'/',
+								'webPath' => $webPath.'/'
+							));
 					}
 					if (is_file($documentPath)){
 						$this->fileList[] = array(
@@ -78,12 +85,29 @@ class Dir{
 				}
 			}
 
-			$this->list = array();
 			$this->list = array_merge($this->dirList, $this->fileList);
 		}
-		catch(Exception $e){
+		catch(Exception $e){}
+	}
 
+	private function checkExecute($dir){
+		if ($this->config['exec']){
+			try{
+				foreach (scandir($dir['documentPath']) as $name){
+					if (!in_array($name, $this->exclude)){
+						$documentPath = $dir['documentPath'].$name;
+						if (is_file($documentPath) && preg_match('/index.html|index.php/i', $name)){
+							$dir['type'] = 'exec';
+							$dir['documentPath'] = $documentPath.'/';
+							$dir['webPath'] .= $name;
+							break;
+						}
+					}
+				}
+			}
+			catch(Exception $e){}
 		}
+		return $dir;
 	}
 }
 
