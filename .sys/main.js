@@ -2,6 +2,7 @@ window.addEventListener('load', function(){
 	var list = document.getElementById('list'),
 		header = document.getElementById('header'),
 		footer = document.getElementById('footer'),
+		history = document.getElementById('history'),
 		execSwitcher = header.querySelector('.exec-switcher'),
 		createScroller = function(selector){
 			if (!isiPad) return;
@@ -10,7 +11,9 @@ window.addEventListener('load', function(){
 		scroller = createScroller(list.querySelector('.directory')),
 		onResizeWindow = function(){
 			var listHeight = window.innerHeight - header.offsetHeight - footer.offsetHeight;
+			var listWidth = window.innerWidth - (history ? history.offsetWidth + 40 : 0);
 			list.style.height = listHeight;
+			list.style.width = listWidth;
 			list.querySelector('.wrapper').style.height = listHeight - list.querySelector('.crumbs').offsetHeight;
 		},
 		loadDirectory = function(href){
@@ -32,6 +35,13 @@ window.addEventListener('load', function(){
 				type = this.getAttribute('type');
 
 			if (type === 'file' || type === 'exec'){
+				if (type === 'exec'){
+					var name = this.innerText;
+					new Post('.sys/save.php', {name: name, href: href}, function(request){
+						if (request.readyState == 4){
+						}
+					});
+				}
 				window.location = href;
 			}
 			if (type === 'dir'){

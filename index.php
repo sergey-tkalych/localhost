@@ -40,6 +40,17 @@
 					</ul>
 				</div>
 			</div>
+			<div id="history">
+				<div class="title">History</div>
+				<ul>
+					<?php foreach ($directory->config['history'] as $name => $href): ?>
+						<li href="<?php echo $href; ?>" type="exec">
+							<?php echo $name; ?>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+			<div class="clear"></div>
 			<div id="footer">
 				<div class="content">
 					<a href=".sys/index.php">Old index</a>

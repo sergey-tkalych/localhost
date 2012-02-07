@@ -46,7 +46,10 @@
 		request.open('POST', url);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		for (var property in data) {
-			params += property + '=' + data[property];
+			params += property + '=' + data[property]+'&';
+		}
+		if (params.length > 0){
+			params = params.substr(0, params.length-1);
 		}
 		request.send(params);
 	}

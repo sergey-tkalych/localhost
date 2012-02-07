@@ -1,6 +1,7 @@
 body {margin: 0; background: #E0E2DA; font: 14px/19px Arial, Verdana; -webkit-user-select: none;}
 
 ul {list-style: none; margin: 0; padding: 0;}
+.clear {clear: both;}
 
 #page {}
 
@@ -14,7 +15,7 @@ ul {list-style: none; margin: 0; padding: 0;}
 #footer .content {background: #F2F2F2; height: 100%; text-align: left; line-height: 30px; border: 1px solid #999;}
 #footer .content a {text-decoration: none; color: #37519b; font-weight: bold; margin: 0 0 0 20px; display: inline-block;}
 
-#list {padding: 0 10px;}
+#list {padding: 0 10px; float: left;}
 #list .wrapper {background: #F2F2F2; overflow-y: auto; border: 1px solid #999;}
 
 #list .directory {}
@@ -22,6 +23,9 @@ ul {list-style: none; margin: 0; padding: 0;}
 #list .directory li[type="dir"], #list .directory li[type="exec"] {background: url("dir.png") 10px 5px no-repeat;}
 #list .directory li:first-child {border-top-right-radius: 0; border-top-left-radius: 0;}
 
-#list .crumbs {min-height: 30px; height: auto; padding: 3px 0;}
+#list .crumbs, #history .title {min-height: 30px; height: auto; padding: 3px 0;}
 #list .crumbs span {display: inline-block; margin: 0 3px 0 0; cursor: pointer; border: 1px solid #e6e9dd; border-radius: 5px; padding: 0 10px; background: #222; color: #ffffff; line-height: 30px;}
 #list .crumbs span.cur {background: #20BCE3;color: #222;}
+
+#history {width: 150px; float: left;}
+#history .title {border-bottom: 1px solid #999; line-height: 30px; font-size: 18px; font-weight: bold; text-align: right;}
